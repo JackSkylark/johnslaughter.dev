@@ -1,0 +1,49 @@
+---
+    import { getCollection, CollectionEntry } from "astro:content";
+    import { sort } from "../../utilities/sort-utilities";
+    import ResumeEntry, { Props as ResumeEntryProps } from "./ResumeEntry.astro";
+
+    const unwrap = async (
+        entry: CollectionEntry<"resume">
+    ) => {
+        const renderResult = await entry.render();
+        const props: ResumeEntryProps = { 
+            company: entry.data.company,
+            position: entry.data.position,
+            startDate: entry.data.startDate,
+            endDate: entry.data.endDate,
+            color: entry.data.color
+        };
+
+        return {
+            props,
+            Content: renderResult.Content
+        }
+    }
+
+    const collection = await getCollection("resume");
+    const resumeEntries = await Promise.all(collection.map(unwrap));
+
+    sort(
+        resumeEntries,
+        {
+            selector: x => x.props.endDate ?? new Date(),
+            isDescending: true
+        },
+        {
+            selector: x => x.props.startDate,
+            isDescending: true
+        },
+        {
+            selector: x => x.props.company,
+            isDescending: true
+        });
+---
+
+{
+    resumeEntries.map(({props, Content}) => 
+            (<ResumeEntry {...props}>
+                <Content />
+            </ResumeEntry>)
+        )
+}

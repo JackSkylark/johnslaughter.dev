@@ -1,0 +1,89 @@
+---
+export interface Props {
+    company: string;
+    position: string;
+    startDate: Date;
+    endDate?: Date | undefined;
+    color?: string | undefined;
+}
+
+const {
+    company,
+    position,
+    startDate,
+    endDate,
+    color
+} = Astro.props;
+
+const startYear = startDate.getFullYear().toString();
+const endYear = endDate?.getFullYear().toString() ?? "Present";
+---
+
+<article class="resume-item">
+    <aside class="year" style={{borderColor: color}}>
+        {startYear} - {endYear}
+    </aside>
+    <div class="inner">
+        <header class="resume-item-header">
+            <h3 class="title">
+                {company}
+            </h3>
+            <p class="subtitle">
+                {position}
+            </p>
+        </header>
+        <div class="resume-item-content">
+            <slot/>
+        </div>
+    </div>
+    
+</article>
+
+<style lang="scss">
+    .resume-item {
+        position: relative;
+        display: block;
+        display: flex;
+        text-align: left;
+        line-height: normal;
+        margin-bottom: 2rem;
+
+        > .year {
+            position: relative;
+            text-align: left;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            z-index: 3;
+            border-right: 0.25rem solid;
+            margin-right: 2rem;
+            padding-top: 2rem;
+            padding-right: 0rem;
+            font-size: 3rem;
+            line-height: normal;
+        }
+    }
+
+    .resume-item-header {
+        margin: 0 0 1rem 0;
+
+        > .title {
+            margin: 1rem 0 0 0;
+            font-size: 3rem;
+        }
+
+        > .subtitle {
+            font-size: 1.8rem;
+            color: #97a2bb;
+            margin: 0;
+        }
+
+        > .logo {
+            display: none;
+        }
+    }
+
+    .resume-item-content {
+        font-size: 1.7rem;
+        color: #cdcdcd;
+    }
+</style>

@@ -1,0 +1,85 @@
+---
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { Content } from "../content/_site/profile.md";
+
+---
+
+<BaseLayout>
+    <div style="">
+        
+        <img src="/img/profile.png" style="max-width: 250px; float: left; padding: 0 2rem 2rem 0;"/>
+        <div>
+            <h1 style="text-align: left; font-size: 4rem; line-height: normal;"> Hi, my name is <b style="color: #97a2bb;">John Slaughter</b></h1>
+            <Content/>
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    .hero {
+        position: relative;
+        display: flex;
+        height: 600px;
+        gap: 1rem;
+        max-width: 1300px;
+        margin: auto;
+        box-sizing: border-box;
+    }
+
+    .hero_img_wrapper {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+    }
+
+    .hero_img {
+        position: relative;
+        flex: 1;
+        background-image: url(/img/profile.png);
+        background-repeat: no-repeat;
+        background-position: right;
+        background-position-y: bottom;
+        background-blend-mode: soft-light;
+        background-size: contain;
+    }
+
+    .aside {
+        position: relative;
+        text-align: center;
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        z-index: 3;
+
+        > a {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #666;
+            text-transform: uppercase;
+        }
+    }
+
+    .content {
+        position: relative;
+        box-sizing: border-box;
+        padding-top: 15rem;
+        left: 0;
+        width: 500px;
+        z-index: 3;
+    }
+
+    .social-links {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1.5rem;
+    }
+
+    .social-links > a {
+        height: 3rem;
+        width: 3rem;
+        color: #FFFFFF;
+        cursor: pointer;
+    }
+</style>
+

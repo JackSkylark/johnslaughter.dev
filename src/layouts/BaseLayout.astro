@@ -1,0 +1,64 @@
+---
+import MainHead from '../components/MainHead.astro';
+import Header from "../components/Header";
+import PageFooter from "../components/PageFooter.astro";
+import GridBg from '../components/GridBg.astro';
+
+import "../styles/styles.scss";
+import "normalize.css/normalize.css";
+import "../styles/typography.scss";
+
+
+interface Props {
+	title?: string | undefined;
+	description?: string | undefined;
+}
+
+const { title, description } = Astro.props;
+
+---
+
+<html lang="en">
+    <head>
+        <MainHead title={title} description={description}/>
+    </head>
+    <body class="body">
+        <GridBg/>
+        <Header/>
+        <div class="site-content">
+            
+            <main class="main">
+                <div class="main-inner">
+                    <slot />
+                </div>
+            </main>
+        </div>
+        <PageFooter/>
+    </body>    
+</html>
+
+<style>
+    body {
+        margin: auto;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .site-content {
+        position: relative;
+        margin: auto;
+        max-width: 1300px;
+        flex: 1;
+    }
+
+    .site-content > main {
+        max-width: 900px;
+        margin: auto;
+    }
+
+    .main-inner {
+        margin: 0rem 6rem;
+    }
+</style>
+

@@ -1,0 +1,54 @@
+.hero {
+    position: relative;
+    display: flex;
+    height: 600px;
+    gap: 1rem;
+    max-width: 1300px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.hero_inner {
+    margin: 0 3rem;
+}
+
+.hero_img_wrapper {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.hero_img {
+    position: relative;
+    flex: 1;
+    background-image: url(/img/profile.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-y: bottom;
+    background-blend-mode: soft-light;
+    background-size: contain;
+}
+
+.aside {
+    position: relative;
+    text-align: center;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    z-index: 3;
+
+    > a {
+        display: inline-block;
+        margin-bottom: 20px;
+        color: #666;
+        text-transform: uppercase;
+    }
+}
+
+.content {
+    position: relative;
+    box-sizing: border-box;
+    padding-top: 15rem;
+    left: 0;
+    width: 500px;
+    z-index: 3;
+}

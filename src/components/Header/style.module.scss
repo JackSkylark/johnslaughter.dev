@@ -1,0 +1,33 @@
+.action {
+    font-size: 2rem;
+    font-family: "Roboto Mono";
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.header {
+    display: flex;
+    margin: 3rem 6rem 6rem 6rem;
+
+    > .logo {
+        @extend .action;
+        font-size: 2.5rem;
+    }
+
+    > .title {
+        flex: 1;
+        text-align: center;
+    }
+
+    > .actions {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        gap: 2rem;
+
+        > a {
+            @extend .action;
+        }
+    }
+}
