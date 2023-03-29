@@ -1,0 +1,37 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import BlogPostList from "../../components/Blog/BlogPostList.astro";
+import SectionHeader from "../../components/SectionHeader.astro";
+
+const blogEntries = 
+        await getCollection(
+            'blog', 
+            ({data}) => !data.isDraft);
+
+blogEntries.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+---
+
+<BaseLayout>
+    <SectionHeader title={"Blog"}>
+        I write about a variety of topics, from software to gamedesign to music theory.
+    </SectionHeader>
+    <BlogPostList />
+</BaseLayout>
+
+<style>
+    h2, .post-item-footer {
+        font-family: var(--font-family-sans);
+        font-weight: 700;
+    }
+
+    .post-item-date {
+        text-align: left;
+        text-transform: uppercase;
+        margin-right: 16px;
+    }
+
+    hr {
+        margin: 60px auto;
+    }
+</style>

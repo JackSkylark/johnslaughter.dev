@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import Post from "./Posts/PostListItem.astro";
+
+const blogEntries = 
+        await getCollection(
+            'blog', 
+            ({data}) => !data.isDraft);
+
+blogEntries.sort((a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf());
+
+---
+
+<div class="blog-posts">
+    { blogEntries.map(post => {
+        const href = `/blog/${post.slug}`;
+
+        return (
+            <Post 
+                href={href}
+                title={post.data.title}
+                description={post.data.description}
+                image={post.data.image ?? ""}
+                publishedAt={post.data.publishDate.toDateString()}
+            />
+        );
+
+    })}
+</div>
+
+<style lang="scss">
+    .blog-posts {
+        display: grid;
+        padding: 0px 1.5em;
+        grid-template-columns: auto auto;
+        gap: 1rem;
+    }
+</style>

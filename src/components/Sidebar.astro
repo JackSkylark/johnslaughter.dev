@@ -1,0 +1,81 @@
+---
+    import { Icon } from "astro-icon";
+    import ExternalLink from "./ExternalLink";
+---
+
+<div class="sidebar">
+    <ExternalLink href="https://github.com/JackSkylark">
+        <div class="social-link-icon">
+            <Icon pack="mdi" name="github" />
+        </div>            
+    </ExternalLink>
+    <ExternalLink href="https://gitlab.com/JackSkylark">
+        <div class="social-link-icon">
+            <Icon pack="mdi" name="gitlab" />
+        </div>            
+    </ExternalLink>
+    <ExternalLink href="https://www.moonlark.studios">
+        <div class="social-link-icon">
+            <Icon pack="ion" name="game-controller" />
+        </div>
+    </ExternalLink>
+    <nav>
+        
+    </nav>
+</div>
+
+<style lang="scss">
+
+    .sidebar {
+        z-index: 32;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding: 1.6rem;
+        font-size: 2rem;
+        line-height: 2.5rem;
+        color: var(--color-header-text);
+        background-color: var(--color-header-bg);
+        align-items: center;
+        flex-wrap: wrap;
+        font-family: "Roboto Mono";
+        gap: 2rem;
+    }
+
+    .sidebar-item {
+        display: flex;
+        //margin-right: 1.6rem;
+        align-self: stretch;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .logo {
+        @extend .sidebar-item;
+
+        font-size: 2.5rem;
+    }
+
+    .social-links {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 1.5rem;
+    }
+
+    .social-link-icon {
+        color: white;
+
+        width: 3rem;
+        height: 3rem;
+    }
+
+    @media (min-width: 48em) {
+        .sidebar {
+            flex-direction: column; 
+            justify-content: start;
+        }
+    }
+
+</style>

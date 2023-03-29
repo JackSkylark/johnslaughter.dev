@@ -1,0 +1,56 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import Layout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+    const blogEntries = 
+        await getCollection(
+            'blog', 
+            ({data}) => !data.isDraft);
+
+    return blogEntries.map(entry => ({
+        params: { slug: entry.slug }, 
+        props: { entry },
+    }));
+}
+
+const blogPost = Astro.props.entry as CollectionEntry<"blog">;
+const { Content } = await blogPost.render();
+const { title, publishDate} = blogPost.data;
+
+---
+
+<Layout>
+    <header>
+        <p>{publishDate} ~ {"10 min"}</p>
+        <h1>{title}</h1>
+        <hr/>
+    </header>
+    <div class="container">
+        <article class="content">
+            <Content/>
+        </article>
+        <hr />
+    </div>
+</Layout>
+
+<style lang="scss">
+    header {
+        text-align: center;
+
+        > h1 {
+            margin-bottom: 0.7em;
+        }
+
+        > p {
+            text-transform: uppercase;
+            font-family: var(--font-family-sans);
+            font-weight: 600;
+        }
+
+        > hr {
+            min-width: 100px;
+            width: 30%;
+        }
+    }
+</style>

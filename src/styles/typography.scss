@@ -1,4 +1,4 @@
-$h1-font-size: 5rem;
+$h1-font-size: 4rem;
 $p-font-size: 2.5rem;
 
 p {
@@ -6,12 +6,15 @@ p {
     margin-top: calc($p-font-size/2);
     margin-bottom: 0;
     transition: font-size 1600ms cubic-bezier(.19,1,.22,1);
+    font-size: $p-font-size;
 }
 
 h1 {
-    line-height: $p-font-size;
+    line-height: $h1-font-size;
     margin-top: calc($p-font-size/2);
     transition: font-size 1600ms cubic-bezier(.19,1,.22,1);
+    font-size: $h1-font-size;
+    text-align: left;
 }
 
 a {

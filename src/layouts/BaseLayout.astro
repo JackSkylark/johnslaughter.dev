@@ -1,12 +1,13 @@
 ---
 import MainHead from '../components/MainHead.astro';
-import Header from "../components/Header";
-import PageFooter from "../components/PageFooter.astro";
+import Header from "../components/HeaderGH.astro";
 import GridBg from '../components/GridBg.astro';
 
 import "../styles/styles.scss";
 import "normalize.css/normalize.css";
 import "../styles/typography.scss";
+import "../styles/variables.scss";
+import Sidebar from '../components/Sidebar.astro';
 
 
 interface Props {
@@ -24,20 +25,37 @@ const { title, description } = Astro.props;
     </head>
     <body class="body">
         <GridBg/>
-        <Header/>
-        <div class="site-content">
-            
-            <main class="main">
-                <div class="main-inner">
-                    <slot />
-                </div>
-            </main>
+
+        <div class="layout">
+            <div class="layout-content">
+                <Header
+                    menuItems={[
+                        {
+                            title: "Resume",
+                            href: "/resume"
+                        },
+                        {
+                            title: "Blog",
+                            href: "/blog"
+                        },
+                        {
+                            title: "Music",
+                            href: "/music"
+                        }
+                    ]}
+                />
+                <main class="main">
+                    <div class="main-inner">
+                        <slot />
+                    </div>
+                </main>
+            </div>
+            <Sidebar/>
         </div>
-        <PageFooter/>
     </body>    
 </html>
 
-<style>
+<style lang="scss">
     body {
         margin: auto;
         min-height: 100vh;
@@ -52,13 +70,35 @@ const { title, description } = Astro.props;
         flex: 1;
     }
 
-    .site-content > main {
+    main {
         max-width: 900px;
         margin: auto;
     }
 
     .main-inner {
-        margin: 0rem 6rem;
+        margin: 6rem;
+
+        :global(a) {
+            color: #97a2bb;
+        }
+    }
+
+    .layout {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        max-width: 1300px;
+        width: 100%;
+
+        > .layout-content {
+            flex: 1;
+        }
+    }
+
+    @media (min-width: 48em) {
+        .layout {
+            flex-direction: row; 
+        }
     }
 </style>
 

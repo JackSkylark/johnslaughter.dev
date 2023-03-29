@@ -1,0 +1,68 @@
+---
+interface Props {
+    href: string;
+    image: string;
+    title: string;
+    description: string;
+    publishedAt: string;
+}
+
+const { href, title, description, image,  publishedAt} = Astro.props;
+
+---
+
+<a class="post" href={href}>
+    <div class="post-image-container">
+        <div class="post-image">
+            <img src={image}/>
+        </div>
+    </div>
+    <h3 class="post-title">
+        { title }
+    </h3>
+    <p class="post-publish-info">
+        { publishedAt }
+    </p>
+    <p class="post-description">
+        { description}
+    </p>
+</a>
+
+<style lang="scss">
+    .post {
+
+    }
+
+    .post-image-container {
+        padding: 1.5em 3em;
+
+        > .post-image > img {
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.36) 0px 4px 16px;
+        }
+    }
+
+    .post-title {
+        font-size: 2.5rem;
+        color: rgb(255, 255, 255);
+        text-align: left;
+        padding: 1em 0.5em 0.5em;
+        margin: 0;
+    }
+
+    .post-publish-info {
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+        color: rgba(255, 255, 255, 0.8);
+        padding: 0em 1em;
+        margin: 0;        
+    }
+
+    .post-description {
+        color: rgb(255, 255, 255);
+        padding: 1em 0.5em 2em;
+        font-weight: 200;
+        margin: 0;
+    }
+
+</style>

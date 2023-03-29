@@ -1,0 +1,176 @@
+---
+    interface MenuItem {
+        title: string;
+        href: string;
+    }
+
+    interface Props {
+        menuItems: MenuItem[];
+    }
+
+    const { menuItems } = Astro.props;
+---
+
+
+<header>
+    <div class="header-item logo">
+        <a href="/">JS</a>
+    </div> 
+    <input class="menu-btn" type="checkbox" id="menu-btn" />
+    <label class="header-item menu-icon" for="menu-btn"><span class="nav-icon"></span></label>
+    <div class="header-item navigation">
+        <nav id="global-nav">
+            {
+                menuItems.map(item => (
+                    <a href={item.href}>{item.title}</a>
+                ))
+            }
+        </nav>
+    </div>
+</header>
+
+<style lang="scss">
+    header {
+        z-index: 32;
+        display: flex;
+        padding: 1.6rem;
+        font-size: 2rem;
+        line-height: 2.5rem;
+        color: var(--color-header-text);
+        background-color: var(--color-header-bg);
+        align-items: center;
+        flex-wrap: wrap;
+        font-family: "Roboto Mono";
+    }    
+
+    .header-item {
+        display: flex;
+        margin-right: 1.6rem;
+        align-self: stretch;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: start;
+
+        &--full {
+            flex: auto;
+        }
+    }
+
+    .navigation {
+        @extend .header-item;
+
+        display: none;
+        order: 2;
+        width: 100%;
+        margin-top: 2rem;
+        
+
+        > nav {
+            display: flex;
+            align-self: stretch;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: end;
+            gap: 2rem;
+            width: 100%;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid;
+        }
+    }
+
+    .logo {
+        flex: auto;
+        font-size: 2.5rem;
+    }
+
+    .logo-container {
+        display: none;
+    }
+
+    .logo-container--media {
+        display: flex;
+    }
+
+    .menu-btn {
+        display: none;
+
+        &:checked {
+            ~ .menu-icon .nav-icon {
+                background: transparent;
+
+                &:before {
+                    transform: rotate(-45deg);
+                    top:0;
+                }
+
+                &:after {
+                    transform: rotate(45deg);
+                    top:0;
+                }
+            }
+
+            ~ .navigation {
+                display: flex;
+            }
+        }
+    }
+
+    .menu-icon {
+
+    }
+
+    .nav-icon {
+        background: var(--color-header-text);
+        display: block;
+        height: 2px;
+        position: relative;
+        transition: background .2s ease-out;
+        width: 18px;
+
+        &:before, &:after {
+            background: var(--color-header-text);
+            content: '';
+            display: block;
+            height: 100%;
+            position: absolute;
+            transition: all .2s ease-out;
+            width: 100%;
+        }
+
+        &:before {
+            top: 5px;
+        }
+
+        &:after {
+            bottom: 5px;
+        }
+    }
+
+    @media (min-width: 48em)
+    {
+        header {
+            flex-wrap: nowrap;
+        }
+
+        .mobile-only {
+            display: none;
+        }
+
+        .navigation {
+            display: flex !important;
+            order: inherit;
+            margin: 0;
+
+            > nav {
+                border-bottom: none;
+                flex-direction: row;
+                gap: 3rem;
+                padding-bottom: 0;
+            }
+        }
+
+        .menu-icon {
+            display: none;
+        }
+    }
+</style>
